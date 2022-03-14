@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /v1
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/product-db?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+    dialect: org.hibernate.dialect.MySQLDialect
+    database: mysql
