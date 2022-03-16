@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProductRequest {
 
-    @NotBlank
+    @NotBlank(message = "Field productName is required")
     private String productName;
-    @NotBlank
+    @NotBlank(message = "Field productBrand is required")
     private String productBrand;
     @NotBlank
+    @NotBlank(message = "Field productPrice is required")
     private BigDecimal productPrice;
     private LocalDateTime date = LocalDateTime.now();
 

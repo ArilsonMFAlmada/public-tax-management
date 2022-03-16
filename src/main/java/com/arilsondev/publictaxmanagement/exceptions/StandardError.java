@@ -9,9 +9,11 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError implements Serializable {
+public class StandardError  implements Serializable {
 
     private Long timestamp;
     private Integer status;
     private String error;
+    private String message;
+    private String path;
 }
