@@ -16,11 +16,11 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query(
-            "SELECT p FROM Product p WHERE" +
+            "SELECT p FROM product p WHERE" +
             "(:productName IS NULL OR p.productName = :productName) AND " +
             "(:productBrand IS NULL OR p.productBrand = :productBrand) AND " +
             "(:productPrice IS NULL OR p.productPrice = :productPrice) AND " +
-            "(:productName IS NULL OR p.productName = :productName)"
+            "(:date IS NULL OR p.date = :date)"
     )
     Page<Product> findAllWithFilters(
         @Param("productName") String productName,

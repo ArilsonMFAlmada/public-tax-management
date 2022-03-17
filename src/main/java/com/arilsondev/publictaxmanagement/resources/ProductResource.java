@@ -24,13 +24,18 @@ public class ProductResource implements BaseController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductResponse> postProduct(@Valid @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<ProductResponse> postProduct(
+            @Valid @RequestBody ProductRequest productRequest) {
 
         return new ResponseEntity<ProductResponse>(productService.postProduct(productRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> getAllProducts(String productName, String productBrand, BigDecimal productPrice, LocalDate date,
+    public ResponseEntity<List<ProductResponse>> getAllProducts(
+            String productName,
+            String productBrand,
+            BigDecimal productPrice,
+            LocalDate date,
             @RequestParam("_offset") @PositiveOrZero @NotNull Integer offset,
             @RequestParam("_limit") @PositiveOrZero @NotNull @Max(ACCEPT_RANGE) Integer limit) {
 
@@ -38,19 +43,24 @@ public class ProductResource implements BaseController {
     }
 
     @GetMapping(value = "/{productId}")
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long productId) {
+    public ResponseEntity<ProductResponse> getProductById(
+            @PathVariable Long productId) {
 
         return new ResponseEntity<ProductResponse>(productService.getProductById(productId), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{productId}")
-    public ResponseEntity<ProductResponse> updateProduct(@Valid @RequestBody ProductRequest productRequest, @PathVariable Long productId) {
+    public ResponseEntity<ProductResponse> updateProduct(
+            @Valid @RequestBody ProductRequest productRequest,
+            @PathVariable Long productId) {
 
         return new ResponseEntity<ProductResponse>(productService.putProduct(productRequest, productId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+    public ResponseEntity<Void> deleteProduct(
+            @PathVariable Long productId) {
+
         productService.deleteProduct(productId);
 
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
