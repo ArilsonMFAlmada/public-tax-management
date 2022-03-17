@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,11 +30,11 @@ public class ProductResource implements BaseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> getAllProducts(
+    public ResponseEntity<List<ProductResponse>> getAllProducts(String productName, String productBrand, BigDecimal productPrice, LocalDate date,
             @RequestParam("_offset") @PositiveOrZero @NotNull Integer offset,
             @RequestParam("_limit") @PositiveOrZero @NotNull @Max(ACCEPT_RANGE) Integer limit) {
 
-        return partialContent(productService.getAllProducts(offset, limit), ACCEPT_RANGE);
+        return partialContent(productService.getAllProducts(productName, productBrand, productPrice, date, offset, limit), ACCEPT_RANGE);
     }
 
     @GetMapping(value = "/{productId}")

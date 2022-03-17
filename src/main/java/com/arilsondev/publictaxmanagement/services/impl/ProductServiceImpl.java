@@ -13,8 +13,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.*;
 
 @Service
 @AllArgsConstructor
@@ -30,10 +35,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductResponse> getAllProducts(Integer offset, Integer limit) {
+    public Page<ProductResponse> getAllProducts(String productName, String productBrand, BigDecimal productPrice, LocalDate date, Integer offset, Integer limit) {
         Pageable pageRequest = PageRequest.of(offset, limit, Sort.by("id"));
 
-        return productRepository.findAll(pageRequest)
+        return productRepository.findAllWithFilters(
+                isNull(productName) ? null : productName,
+                isNull(productBrand) ? null : productBrand,
+                isNull(productPrice) ? null : productPrice,
+                isNull(date) ? null : date,
+                pageRequest)
                .map(Product::toProductResponse);
     }
 
