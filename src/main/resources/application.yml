@@ -3,11 +3,9 @@ server:
   servlet:
     context-path: /v1
 
-
-
-
-
 spring:
+  application:
+    name: public-tax-management-api
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/product-db?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
@@ -24,3 +22,6 @@ spring:
     show-sql: true
     dialect: org.hibernate.dialect.MySQLDialect
     database: mysql
+
+
+#SWAGGER: http://localhost:8080/v1/swagger-ui.html
