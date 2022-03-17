@@ -24,7 +24,7 @@ public class ProductRequest {
     @NotBlank
     private BigDecimal productPrice;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     @NotBlank
     private LocalDate date;
 

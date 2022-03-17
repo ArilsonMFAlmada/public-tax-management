@@ -18,6 +18,6 @@ public class ProductResponse {
     private String productName;
     private String productBrand;
     private BigDecimal productPrice;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDate date;
 }

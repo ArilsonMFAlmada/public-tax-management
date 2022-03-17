@@ -32,7 +32,7 @@ public class Product extends AuditDomain implements Serializable {
     @Column(name = "product_price", nullable = false)
     private BigDecimal productPrice;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
