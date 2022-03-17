@@ -1,6 +1,7 @@
-package com.arilsondev.publictaxmanagement.entities;
+package com.arilsondev.publictaxmanagement.domains;
 
 import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,14 +10,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class Product implements Serializable {
+@Entity(name = "product")
+public class Product extends AuditDomain implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +32,9 @@ public class Product implements Serializable {
     @Column(name = "product_price", nullable = false)
     private BigDecimal productPrice;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     @Column(name = "date", nullable = false)
-    private LocalDateTime date;
+    private LocalDate date;
 
     public ProductResponse toProductResponse() {
         return ProductResponse.builder()

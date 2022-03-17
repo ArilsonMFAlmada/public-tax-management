@@ -2,7 +2,7 @@ package com.arilsondev.publictaxmanagement.services.impl;
 
 import com.arilsondev.publictaxmanagement.dtos.ProductRequest;
 import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
-import com.arilsondev.publictaxmanagement.entities.Product;
+import com.arilsondev.publictaxmanagement.domains.Product;
 import com.arilsondev.publictaxmanagement.exceptions.ObjectNotFoundException;
 import com.arilsondev.publictaxmanagement.repositories.ProductRepository;
 import com.arilsondev.publictaxmanagement.services.ProductService;

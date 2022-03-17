@@ -1,27 +1,32 @@
 package com.arilsondev.publictaxmanagement.dtos;
 
-import com.arilsondev.publictaxmanagement.entities.Product;
+import com.arilsondev.publictaxmanagement.domains.Product;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequest {
 
-    @NotBlank(message = "Field productName is required")
-    private String productName;
-    @NotBlank(message = "Field productBrand is required")
-    private String productBrand;
     @NotBlank
-    @NotBlank(message = "Field productPrice is required")
+    private String productName;
+
+    @NotBlank
+    private String productBrand;
+
+    @NotBlank
     private BigDecimal productPrice;
-    private LocalDateTime date = LocalDateTime.now();
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    @NotBlank
+    private LocalDate date;
 
     public Product productRequestToProduct() {
         return Product.builder()
