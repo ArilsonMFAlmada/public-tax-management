@@ -7,6 +7,10 @@ import com.arilsondev.publictaxmanagement.exceptions.ObjectNotFoundException;
 import com.arilsondev.publictaxmanagement.repositories.ProductRepository;
 import com.arilsondev.publictaxmanagement.services.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,11 +30,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getAllProducts() {
+    public Page<ProductResponse> getAllProducts(Integer offset, Integer limit) {
+        Pageable pageRequest = PageRequest.of(offset, limit, Sort.by("id"));
 
-       return productRepository.findAll()
-               .stream()
-               .map(Product::toProductResponse).collect(Collectors.toList());
+        return productRepository.findAll(pageRequest)
+               .map(Product::toProductResponse);
     }
 
     @Override
