@@ -1,4 +1,4 @@
-package com.arilsondev.publictaxmanagement.resources;
+package com.arilsondev.publictaxmanagement.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

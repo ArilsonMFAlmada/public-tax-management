@@ -1,4 +1,4 @@
-package com.arilsondev.publictaxmanagement.resources;
+package com.arilsondev.publictaxmanagement.controller;
 
 import com.arilsondev.publictaxmanagement.dtos.ProductRequest;
 import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("products")
-public class ProductResource implements BaseController {
+public class ProductController implements BaseController {
 
     private final ProductService productService;
 
@@ -35,11 +35,11 @@ public class ProductResource implements BaseController {
             String productName,
             String productBrand,
             BigDecimal productPrice,
-            LocalDate date,
+            String unitMeasurement,
             @RequestParam("_offset") @PositiveOrZero @NotNull Integer offset,
             @RequestParam("_limit") @PositiveOrZero @NotNull @Max(ACCEPT_RANGE) Integer limit) {
 
-        return partialContent(productService.getAllProducts(productName, productBrand, productPrice, date, offset, limit), ACCEPT_RANGE);
+        return partialContent(productService.getAllProducts(productName, productBrand, productPrice, unitMeasurement, offset, limit), ACCEPT_RANGE);
     }
 
     @GetMapping(value = "/{productId}")

@@ -5,8 +5,6 @@ import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 
 public interface ProductService {
 
@@ -14,9 +12,15 @@ public interface ProductService {
 
     ProductResponse getProductById(Long productId);
 
-    ProductResponse putProduct(ProductRequest productRequest, Long productId);
+    ProductResponse putProduct(ProductRequest productRequest,
+                               Long productId);
 
     void deleteProduct(Long productId);
 
-    Page<ProductResponse> getAllProducts(String productName, String productBrand, BigDecimal productPrice, LocalDate date, Integer offset, Integer limit);
+    Page<ProductResponse> getAllProducts(String productName,
+                                         String productBrand,
+                                         BigDecimal productPrice,
+                                         String unitMeasurement,
+                                         Integer offset,
+                                         Integer limit);
 }

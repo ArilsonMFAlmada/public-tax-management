@@ -9,25 +9,23 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(
             "SELECT p FROM product p WHERE" +
-            "(:productName IS NULL OR p.productName = :productName) AND " +
-            "(:productBrand IS NULL OR p.productBrand = :productBrand) AND " +
-            "(:productPrice IS NULL OR p.productPrice = :productPrice) AND " +
-            "(:date IS NULL OR p.date = :date)"
+                    "(:productName IS NULL OR p.productName = :productName) AND " +
+                    "(:productBrand IS NULL OR p.productBrand = :productBrand) AND " +
+                    "(:productPrice IS NULL OR p.productPrice = :productPrice) AND " +
+                    "(:UnitMeasurement IS NULL OR p.unitMeasurement = :unitMeasurement)"
     )
     Page<Product> findAllWithFilters(
-        @Param("productName") String productName,
-        @Param("productBrand") String productBrand,
-        @Param("productPrice") BigDecimal productPrice,
-        @Param("date") LocalDate date,
-        Pageable pageRequest
+            @Param("productName") String productName,
+            @Param("productBrand") String productBrand,
+            @Param("productPrice") BigDecimal productPrice,
+            @Param("UnitMeasurement") String UnitMeasurement,
+            Pageable pageRequest
     );
 
 }

@@ -7,6 +7,7 @@ import com.arilsondev.publictaxmanagement.exceptions.ObjectNotFoundException;
 import com.arilsondev.publictaxmanagement.repositories.ProductRepository;
 import com.arilsondev.publictaxmanagement.services.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 import static java.util.Objects.*;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -37,14 +38,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductResponse> getAllProducts(String productName, String productBrand, BigDecimal productPrice, LocalDate date, Integer offset, Integer limit) {
+    public Page<ProductResponse> getAllProducts(
+            String productName,
+            String productBrand,
+            BigDecimal productPrice,
+            String unitMeasurement,
+            Integer offset,
+            Integer limit) {
         Pageable pageRequest = PageRequest.of(offset, limit, Sort.by("id"));
 
         return productRepository.findAllWithFilters(
                 isNull(productName) ? null : productName,
                 isNull(productBrand) ? null : productBrand,
                 isNull(productPrice) ? null : productPrice,
-                isNull(date) ? null : date,
+                isNull(unitMeasurement) ? null : unitMeasurement,
                 pageRequest)
                .map(Product::toProductResponse);
     }
@@ -63,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productRequest.getProductName());
         product.setProductBrand(productRequest.getProductBrand());
         product.setProductPrice(productRequest.getProductPrice());
-        product.setDate(productRequest.getDate());
+        product.setUnitMeasurement(productRequest.getUnitMeasurement());
 
         Product productToBeSaved = productRepository.save(product);
 

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -24,16 +23,15 @@ public class ProductRequest {
     @NotBlank
     private BigDecimal productPrice;
 
-    @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     @NotBlank
-    private LocalDate date;
+    private String unitMeasurement;
 
     public Product productRequestToProduct() {
         return Product.builder()
                 .productName(this.productName)
                 .productBrand(this.productBrand)
                 .productPrice(this.productPrice)
-                .date(this.date)
+                .unitMeasurement(this.unitMeasurement)
                 .build();
     }
 }
