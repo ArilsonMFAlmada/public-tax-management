@@ -11,6 +11,7 @@ import com.arilsondev.publictaxmanagement.services.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,13 +24,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
     private final ProductService productService;
 
+    @Transactional
     @Override
     public PurchaseResponse postPurchase(PurchaseRequest purchaseRequest) {
 
-        List<Product> products = purchaseRequest.getProductsIds()
-                .stream()
-                .map(productService::getProduct)
-                .collect(Collectors.toList());
+        List<Product> products = verifyProducts(purchaseRequest);
 
         Purchase purchase = purchaseRepository.save(purchaseRequest.purchaseRequestToPurchase(products));
 
@@ -43,10 +42,23 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseRepository.delete(purchase);
     }
 
+    @Transactional
     @Override
     public PurchaseResponse putPurchase(PurchaseRequest purchaseRequest, Long purchaseId) {
+        Purchase purchase = getPurchase(purchaseId);
 
-        return null;
+        List<Product> products = verifyProducts(purchaseRequest);
+
+        purchase.setId(purchaseId);
+        purchase.setProducts(products);
+        purchase.setCep(purchaseRequest.getCep());
+        purchase.setEstate(purchaseRequest.getEstate());
+        purchase.setCity(purchaseRequest.getCity());
+        purchase.setDate(purchaseRequest.getDate());
+
+        Purchase purchaseTobeSaved = purchaseRepository.save(purchase);
+
+        return purchaseTobeSaved.toPurchaseResponse();
     }
 
     @Override
@@ -66,5 +78,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         return purchaseRepository.findById(purchaseId)
                 .orElseThrow(() -> new ObjectNotFoundException("Purchase not found! PurchaseId: " + purchaseId + ", Type: " + Purchase.class.getSimpleName()));
+    }
+
+    private List<Product> verifyProducts(PurchaseRequest purchaseRequest) {
+
+        return purchaseRequest.getProductsIds()
+                .stream()
+                .map(productService::getProduct)
+                .collect(Collectors.toList());
     }
 }
