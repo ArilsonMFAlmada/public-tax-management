@@ -1,6 +1,5 @@
 package com.arilsondev.publictaxmanagement.domains;
 
-import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
 import com.arilsondev.publictaxmanagement.dtos.PurchaseResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -45,7 +44,7 @@ public class Purchase extends AuditDomain implements Serializable {
     public PurchaseResponse toPurchaseResponse() {
         return PurchaseResponse.builder()
                 .productsNames(this.products.stream()
-                        .map(product -> product.getProductName())
+                        .map(Product::getProductName)
                         .collect(Collectors.toList()))
                 .date(this.date)
                 .cep(this.cep)

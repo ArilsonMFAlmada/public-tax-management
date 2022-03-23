@@ -1,12 +1,8 @@
 package com.arilsondev.publictaxmanagement.controller;
 
-import com.arilsondev.publictaxmanagement.dtos.ProductRequest;
-import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
 import com.arilsondev.publictaxmanagement.dtos.PurchaseRequest;
 import com.arilsondev.publictaxmanagement.dtos.PurchaseResponse;
-import com.arilsondev.publictaxmanagement.services.ProductService;
 import com.arilsondev.publictaxmanagement.services.PurchaseService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 

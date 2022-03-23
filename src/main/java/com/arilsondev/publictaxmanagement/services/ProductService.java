@@ -1,5 +1,6 @@
 package com.arilsondev.publictaxmanagement.services;
 
+import com.arilsondev.publictaxmanagement.domains.Product;
 import com.arilsondev.publictaxmanagement.dtos.ProductRequest;
 import com.arilsondev.publictaxmanagement.dtos.ProductResponse;
 import org.springframework.data.domain.Page;
@@ -23,4 +24,6 @@ public interface ProductService {
                                          String unitMeasurement,
                                          Integer offset,
                                          Integer limit);
+
+    Product getProduct(Long productId);
 }

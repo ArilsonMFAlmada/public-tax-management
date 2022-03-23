@@ -18,13 +18,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                     "(:productName IS NULL OR p.productName = :productName) AND " +
                     "(:productBrand IS NULL OR p.productBrand = :productBrand) AND " +
                     "(:productPrice IS NULL OR p.productPrice = :productPrice) AND " +
-                    "(:UnitMeasurement IS NULL OR p.unitMeasurement = :unitMeasurement)"
+                    "(:unitMeasurement IS NULL OR p.unitMeasurement = :unitMeasurement)"
     )
     Page<Product> findAllWithFilters(
             @Param("productName") String productName,
             @Param("productBrand") String productBrand,
             @Param("productPrice") BigDecimal productPrice,
-            @Param("UnitMeasurement") String UnitMeasurement,
+            @Param("unitMeasurement") String unitMeasurement,
             Pageable pageRequest
     );
 
