@@ -10,12 +10,18 @@ import com.arilsondev.publictaxmanagement.services.ProductService;
 import com.arilsondev.publictaxmanagement.services.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.*;
 
 @Service
 @RequiredArgsConstructor
@@ -69,9 +75,21 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Page<PurchaseResponse> getAllPurchases(LocalDate date, String cep, String city, String estate, Integer offset, Integer limit) {
+    public Page<PurchaseResponse> getAllPurchases(LocalDate date,
+                                                  String cep,
+                                                  String city,
+                                                  String estate,
+                                                  Integer offset,
+                                                  Integer limit) {
+        Pageable pageRequest = PageRequest.of(offset, limit, Sort.by("id"));
 
-        return null;
+        return purchaseRepository.findAllWithFilters(
+                isNull(date) ? null : date,
+                isNull(cep) ? null : cep,
+                isNull(city) ? null : city,
+                isNull(estate) ? null : estate,
+                pageRequest
+        );
     }
 
     private Purchase getPurchase(Long purchaseId) {

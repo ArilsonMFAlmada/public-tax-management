@@ -27,5 +27,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("unitMeasurement") String unitMeasurement,
             Pageable pageRequest
     );
-
 }
