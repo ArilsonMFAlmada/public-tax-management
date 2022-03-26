@@ -26,7 +26,7 @@ public class PurchaseController implements BaseController {
     public ResponseEntity<PurchaseResponse> postPurchase(
             @Valid @RequestBody PurchaseRequest purchaseRequest) {
 
-        return new ResponseEntity<PurchaseResponse>(purchaseService.postPurchase(purchaseRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(purchaseService.postPurchase(purchaseRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -45,7 +45,7 @@ public class PurchaseController implements BaseController {
     public ResponseEntity<PurchaseResponse> getPurchaseById(
             @PathVariable Long purchaseId) {
 
-        return new ResponseEntity<PurchaseResponse>(purchaseService.getPurchaseById(purchaseId), HttpStatus.OK);
+        return new ResponseEntity<>(purchaseService.getPurchaseById(purchaseId), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{purchaseId}")
@@ -53,7 +53,7 @@ public class PurchaseController implements BaseController {
             @Valid @RequestBody PurchaseRequest purchaseRequest,
             @PathVariable Long purchaseId) {
 
-        return new ResponseEntity<PurchaseResponse>(purchaseService.putPurchase(purchaseRequest, purchaseId), HttpStatus.OK);
+        return new ResponseEntity<>(purchaseService.putPurchase(purchaseRequest, purchaseId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{purchaseId}")
@@ -62,6 +62,6 @@ public class PurchaseController implements BaseController {
 
         purchaseService.deletePurchase(purchaseId);
 
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

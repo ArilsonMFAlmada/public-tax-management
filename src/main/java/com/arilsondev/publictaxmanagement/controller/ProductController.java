@@ -13,7 +13,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class ProductController implements BaseController {
     public ResponseEntity<ProductResponse> postProduct(
             @Valid @RequestBody ProductRequest productRequest) {
 
-        return new ResponseEntity<ProductResponse>(productService.postProduct(productRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(productService.postProduct(productRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -46,7 +45,7 @@ public class ProductController implements BaseController {
     public ResponseEntity<ProductResponse> getProductById(
             @PathVariable Long productId) {
 
-        return new ResponseEntity<ProductResponse>(productService.getProductById(productId), HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{productId}")
@@ -54,7 +53,7 @@ public class ProductController implements BaseController {
             @Valid @RequestBody ProductRequest productRequest,
             @PathVariable Long productId) {
 
-        return new ResponseEntity<ProductResponse>(productService.putProduct(productRequest, productId), HttpStatus.OK);
+        return new ResponseEntity<>(productService.putProduct(productRequest, productId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{productId}")
@@ -63,6 +62,6 @@ public class ProductController implements BaseController {
 
         productService.deleteProduct(productId);
 
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
