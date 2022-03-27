@@ -80,6 +80,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(Long productId) {
 
-        return productRepository.findById(productId).orElseThrow(() -> new ObjectNotFoundException("Product not found! ProductId: " + productId + ", Type: " + Product.class.getSimpleName()));
+        return productRepository.findById(productId).orElseThrow(
+                () -> new ObjectNotFoundException("Product not found! ProductId: " +
+                                                    productId + ", Type: " + Product.class.getSimpleName()));
     }
 }

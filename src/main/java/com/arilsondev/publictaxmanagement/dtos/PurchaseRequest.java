@@ -9,28 +9,33 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
+
+import static com.arilsondev.publictaxmanagement.interfaces.Messages.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PurchaseRequest {
 
-    @NotNull
+    @NotNull(message = PRODUCT_ID_VALIDATION)
     private List<Long> productsIds;
 
-    @NotBlank
+    @NotBlank(message = PURCHASE_DATE)
     @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDate date;
 
-    @NotBlank
+    @NotBlank(message = PURCHASE_CEP)
     private String cep;
 
-    @NotBlank
+    @NotBlank(message = PURCHASE_ESTATE)
+    @Size(min = 1, max = 2)
     private String estate;
 
-    @NotBlank
+    @NotBlank(message = PURCHASE_CITY)
+    @Size(min = 1, max = 200)
     private String city;
 
     public Purchase purchaseRequestToPurchase(List<Product> products) {

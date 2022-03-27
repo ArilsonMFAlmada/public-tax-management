@@ -6,23 +6,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+
+import static com.arilsondev.publictaxmanagement.interfaces.Messages.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequest {
 
-    @NotBlank
+    @NotBlank(message = PRODUCT_NAME_VALIDATION)
+    @Size(min = 1, max = 200)
     private String productName;
 
-    @NotBlank
+    @NotBlank(message = PRODUCT_BRAND_VALIDATION)
+    @Size(min = 1, max = 200)
     private String productBrand;
 
-    @NotBlank
+    @NotBlank(message = PRODUCT_PRICE_VALIDATION)
+    @Positive
     private BigDecimal productPrice;
 
-    @NotBlank
+    @NotBlank(message = UNIT_MEASUREMENT_VALIDATION)
+    @Size(min = 1, max = 10)
     private String unitMeasurement;
 
     public Product productRequestToProduct() {
