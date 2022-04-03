@@ -4,6 +4,7 @@ import com.arilsondev.publictaxmanagement.domains.Product;
 import com.arilsondev.publictaxmanagement.domains.Purchase;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import static com.arilsondev.publictaxmanagement.interfaces.Messages.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PurchaseRequest {
 
     @NotNull(message = PRODUCT_ID_VALIDATION)

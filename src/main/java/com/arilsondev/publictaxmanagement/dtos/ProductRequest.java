@@ -2,6 +2,7 @@ package com.arilsondev.publictaxmanagement.dtos;
 
 import com.arilsondev.publictaxmanagement.domains.Product;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import static com.arilsondev.publictaxmanagement.interfaces.Messages.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProductRequest {
 
     @NotBlank(message = PRODUCT_NAME_VALIDATION)
