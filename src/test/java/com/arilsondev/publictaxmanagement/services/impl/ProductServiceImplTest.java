@@ -17,8 +17,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -79,7 +81,17 @@ class ProductServiceImplTest {
         assertDoesNotThrow(() -> productService.getAllProducts(PRODUCT_NAME, PRODUCT_BRAND, PRODUCT_PRICE, UNIT_MEASUREMENT, OFFSET, LIMIT));
     }
 
-    @DisplayName("Get All Products Should throw Object Not Found Exception")
+    @DisplayName("Should Get Product By Id Successfully")
+    @Test
+    void getProductByIdSuccessfully() {
+
+        when(productRepository.findById(anyLong()))
+                .thenReturn(Optional.of(PRODUCT));
+
+        assertDoesNotThrow(() -> productService.getProductById(1L));
+    }
+
+    @DisplayName("Get Product By Id Should throw Object Not Found Exception")
     @Test
     void getProductByIdThrowsObjectNotFoundException() {
 
@@ -104,6 +116,7 @@ class ProductServiceImplTest {
         assertEquals(PRODUCT.getProductPrice(), productRequest.getProductPrice());
     }
 
+    @DisplayName("Should Delete Product Successfully")
     @Test
     void deleteProductSuccessfully() {
 

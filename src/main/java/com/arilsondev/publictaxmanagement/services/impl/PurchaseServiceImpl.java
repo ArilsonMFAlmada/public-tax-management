@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor
@@ -83,12 +83,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         Pageable pageRequest = PageRequest.of(offset, limit, Sort.by("id"));
 
         return purchaseRepository.findAllWithFilters(
-                isNull(date) ? null : date,
-                isNull(cep) ? null : cep,
-                isNull(city) ? null : city,
-                isNull(estate) ? null : estate,
-                pageRequest
-        );
+                        isNull(date) ? null : date,
+                        isNull(cep) ? null : cep,
+                        isNull(city) ? null : city,
+                        isNull(estate) ? null : estate,
+                        pageRequest)
+                .map(Purchase::toPurchaseResponse);
     }
 
     private Purchase getPurchase(Long purchaseId) {

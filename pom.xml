@@ -71,6 +71,19 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>3.4.0.905</version>
 				</plugin>
+				<plugin>
+					<groupId>org.pitest</groupId>
+					<artifactId>pitest-maven</artifactId>
+					<version>LATEST</version>
+					<configuration>
+						<targetClasses>
+							<param>com.arilsondev.publictaxmanagement.services.impl.ProductServiceImpl</param>
+						</targetClasses>
+						<targetTests>
+							<param>com.arilsondev.publictaxmanagement.services.impl.ProductServiceImplTest</param>
+						</targetTests>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>

@@ -21,7 +21,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
                     "(:city IS NULL OR p.city = :city) AND " +
                     "(:estate IS NULL OR p.estate = :estate)"
     )
-    Page<PurchaseResponse> findAllWithFilters(
+    Page<Purchase> findAllWithFilters(
             @Param("date") LocalDate date,
             @Param("cep") String cep,
             @Param("city")String city,
