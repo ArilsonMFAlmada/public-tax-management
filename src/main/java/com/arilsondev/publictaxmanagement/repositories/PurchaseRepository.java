@@ -1,7 +1,6 @@
 package com.arilsondev.publictaxmanagement.repositories;
 
 import com.arilsondev.publictaxmanagement.domains.Purchase;
-import com.arilsondev.publictaxmanagement.dtos.PurchaseResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +23,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     Page<Purchase> findAllWithFilters(
             @Param("date") LocalDate date,
             @Param("cep") String cep,
-            @Param("city")String city,
-            @Param("estate")String estate,
+            @Param("city") String city,
+            @Param("estate") String estate,
             Pageable pageRequest);
 }
