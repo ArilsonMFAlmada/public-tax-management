@@ -10,7 +10,14 @@ There is a docker folder inside the resources folder with a docker-compose.yml f
 ## Tests
 The main focus of the unit tests was to test the service implementation classes, as these classes contain the core business logic in this project.
 
+## Postman's Collection
+https://www.getpostman.com/collections/4269051d92a4bb1642ae
+
 ## Author
 Arilson Almada
+
+
+
+
 
 
